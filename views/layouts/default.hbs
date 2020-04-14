@@ -15,13 +15,79 @@
     {{{body}}}
 </div>
 <div>
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for events..">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+#myInput {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 12px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+#myUL {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#myUL li a {
+  border: 1px solid #ddd;
+  margin-top: -1px; /* Prevent double borders */
+  background-color: #f6f6f6;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  color: black;
+  display: block
+}
+
+#myUL li a:hover:not(.header) {
+  background-color: #eee;
+}
+</style>
+
+<ul id="myUL">
+  <li><a href="getEvents">an event</a></li>
+  <li><a href="#events">another event</a></li>
+</ul>
+
+<script>
+function myFunction() {
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("myUL");
+    li = ul.getElementsByTagName("li");
+    for (i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("a")[0];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
+</script>
+    </div>
+<div>
   <h2 style="color:blue;">Add an event</h2>
     <form action="/event" method="post">
        title: <input name="title" type="text" /> <br />
        description: <input name="description" type="text" /> <br />
+       location: <input name="location" type="text" /> <br />
        <br />
         <input type="submit" name="submit" value="submit" />
     </form>
   </div>
+
 </body>
 </html>
